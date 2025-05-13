@@ -1,4 +1,6 @@
-﻿namespace Pronia_BB104.Models;
+﻿using Pronia_BB104.Models;
+
+namespace Pronia_BB104.Models;
 
 public class Slider : BaseEntity
 {

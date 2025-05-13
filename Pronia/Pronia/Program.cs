@@ -1,4 +1,7 @@
-namespace Pronia
+using Microsoft.EntityFrameworkCore;
+using Pronia_BB104.Context;
+
+namespace Pronia_BB104
 {
     public class Program
     {
@@ -8,6 +11,8 @@ namespace Pronia
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddDbContext<ProniaDbContext>(opt => opt.UseSqlServer("Server=.;Database=Pronia-BB104-DB;Trusted_Connection=True;TrustServerCertificate=True"));
 
             var app = builder.Build();
 

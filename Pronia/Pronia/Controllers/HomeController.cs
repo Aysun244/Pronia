@@ -1,12 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Pronia_BB104.Context;
 using Pronia_BB104.Models;
-using Pronia_BB104.Repositories.Implementations;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace Pronia_BB104.Controllers;
 
-public class HomeController : Controller
+public class HomeController(ProniaDbContext _context) : Controller
 {
 
     public class HomeModel
@@ -19,18 +20,13 @@ public class HomeController : Controller
     public async Task<IActionResult> Index()
     {
 
-        SliderRepository sliderRepository = new();
-        ServiceRepository serviceRepository = new();
-
-        var sliders = await sliderRepository.GetAllAsync();
-        var services = await serviceRepository.GetAllAsync();
-        //ViewData["Sliders"] = sliders;
-        //ViewData["Sliders"] = "salam";
-
+       
+        var services = await _context.Services.ToListAsync();
+        var sliders = await _context.Sliders.ToListAsync();
         HomeModel model = new()
         {
             Sliders = sliders,
-            Services = services.Take(3).ToList()
+            Services = services,
         };
 
 
